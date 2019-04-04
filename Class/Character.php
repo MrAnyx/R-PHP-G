@@ -1,12 +1,22 @@
 <?php
+
+
+namespace App;
+
+
 class Character{
 
     public const ALIVE = 'alive';
     public const DEAD = 'dead';
     public const ATTAQUE_COST = 5;
     public const AP_REGEN = 60;
-    public const AP_MAX = 20;
+    public const HEAL_COST = 2;
+    public const HP_MAX = 100;
+    public const AP_MAX = 100;
+    public const LEVEL_EXPERIENCE = 1000;
 
+    public $experience = 0;
+    private $level = 1;
     private $id;
     private $name;
     private $hp;
@@ -64,18 +74,6 @@ class Character{
 
 
 
-    public function getHp(){
-        return $this->hp;
-    }
-
-    public function setHp($hp){
-        $this->hp = $hp;
-    }
-
-
-
-
-
 
 
 
@@ -104,6 +102,20 @@ class Character{
 
 
 
+    public function getLevel(){
+        return $this->level;
+    }
+
+    public function setLevel($level){
+        $this->level = $level;
+    }
+
+
+
+
+
+
+
 
     public function getLastAction(){
         return $this->lastaction;
@@ -126,7 +138,13 @@ class Character{
 
 
 
+    public function getExperience(){
+        return $this->experience;
+    }
 
+    public function setExperience(int $exp){
+        $this->experience = $exp;
+    }
 
 
 
@@ -140,12 +158,44 @@ class Character{
             $newAP = floor($seconde / self::AP_REGEN);
             $this->ap = $this->ap + $newAP;
         }
+        if ($this->ap > self::AP_MAX) {
+            $this->ap = self::AP_MAX;
+        }
+    }
+
+
+
+    public function setHp($hp)
+    {
+        if ($hp > $this->getHpMax()) {
+            $this->hp = $this->getHpMax();
+        } else {
+            $this->hp = $hp;
+        }
+    }
+    public function getHp(){
+        return $this->hp;
     }
 
 
 
 
+    public function getHpMax()
+    {
+        return self::HP_MAX;
+    }
 
+
+
+
+    public function checkExperience()
+    {
+        $experienceMax = $this->level * self::LEVEL_EXPERIENCE;
+        if ($this->experience >= $experienceMax) {
+            ++$this->level;
+            $this->experience = 0;
+        }
+    }
 
 
 

@@ -19,7 +19,9 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
             'name' => $_POST['name'],
             'password' => password_hash($_POST['password'], PASSWORD_ARGON2I),
             'hp' => '100',
-            'ap' => '10'
+            'ap' => '10',
+            'experience' => '0',
+            'level' => '1'
     ]);
 
     $characterRepository = new CharacterRepository($base);

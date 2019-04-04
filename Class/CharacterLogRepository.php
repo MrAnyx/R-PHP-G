@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+
 class CharacterLogRepository
 {
     private $base;
@@ -11,7 +14,7 @@ class CharacterLogRepository
 
     public function add(Character $character, $message)
     {
-        $datenow = new DateTime('now'); 
+        $datenow = new DateTime('now');
 
         $response = $this->base->prepare('INSERT INTO characters_log (message, add_at, character_id) VALUES(:message, :add_at, :character_id)');
         $response->bindValue(':message', $message);

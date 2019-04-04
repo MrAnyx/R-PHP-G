@@ -27,18 +27,31 @@ if (isset($_SESSION['id'])) {
             $enemy->setHp($hp);
             $characterRepository->updateHp($enemy);
 
-            $message = $myCharacter->getName() . " attaque ". $enemy->getName(). " pour " . $damage ." de dommage <br>";
+            $message = $myCharacter->getName() . " attaque ". $enemy->getName(). " pour " . $damage ." de dommage";
             echo $message;
-            
+            $myCharacter->experience+=100;
+            $characterRepository->update($myCharacter);
+            $myCharacter->checkExperience();
+
+
+
             if ($enemy->getState() === Character::DEAD) {
                 $message = $enemy->getName(). " est mort";
                 echo $message;
+                $myCharacter->experience+=500;
+                $characterRepository->update($myCharacter);
+                $myCharacter->checkExperience();
+
             }
         } else {
             $message = "Vous n'avez pas assez de point d'action";
             echo $message;
         }
     }
+    // J'enregistre les logs dans chaques journal
+    $characterLogRepository = new CharacterLogRepository($base);
+    $characterLogRepository->add($myCharacter, $message);
+    $characterLogRepository->add($enemy, $message);
 
 }
 

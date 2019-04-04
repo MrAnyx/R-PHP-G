@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+
 class CharacterRepository{
     private $base;
 
@@ -10,11 +13,14 @@ class CharacterRepository{
 
 
     public function add(Character $character){
-        $response = $this->base->prepare('INSERT INTO characters (name, password, hp, ap) VALUES(:name, :password, :hp, :ap)');
+        $response = $this->base->prepare('INSERT INTO characters (name, password, hp, ap, experience, level) VALUES(:name, :password, :hp, :ap, :experience, :level)');
         $response->bindValue(':name', $character->getName());
         $response->bindValue(':password', $character->getPassword());
         $response->bindValue(':hp', $character->getHp());
         $response->bindValue(':ap', $character->getAp());
+        $response->bindValue(':experience', $character->getExperience());
+        $response->bindValue(':level', $character->getLevel());
+
 
         $response->execute();
 
@@ -130,6 +136,18 @@ class CharacterRepository{
         $response->bindValue(':ap', $character->getAp(), PDO::PARAM_INT);
         $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
 
+        $response->execute();
+    }
+
+    public function update(Character $character)
+    {
+        $character->checkExperience();
+        $response = $this->base->prepare('UPDATE characters SET hp = :hp, ap = :ap, experience = :experience, level = :level WHERE id = :id');
+        $response->bindValue(':ap', $character->getAp(), PDO::PARAM_INT);
+        $response->bindValue(':experience', $character->getExperience(), PDO::PARAM_INT);
+        $response->bindValue(':hp', $character->getHp(), PDO::PARAM_INT);
+        $response->bindValue(':level', $character->getLevel(), PDO::PARAM_INT);
+        $response->bindValue(':id', $character->getId(), PDO::PARAM_INT);
         $response->execute();
     }
 }

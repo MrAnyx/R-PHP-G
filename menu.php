@@ -15,7 +15,7 @@ if (isset($_SESSION['id'])) {?>
 
 <?php if (isset($_SESSION['id'])) : ?>
         <div>
-            PA : <?= $character->getHp(); ?>, AP : <?= $character->getAp(); ?>
+            PV : <?= $character->getHp(); ?>, AP : <?= $character->getAp(); ?>
         </div>
     <?php endif ?>
 
