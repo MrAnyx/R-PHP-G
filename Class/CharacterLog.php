@@ -1,9 +1,8 @@
-
-
 <?php
-
 namespace App;
 
+use PDO;
+use DateTime;
 
 class CharacterLog{
     private $id;

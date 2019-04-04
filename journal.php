@@ -1,6 +1,10 @@
 <?php
 require __DIR__.'/header.php';
 
+use App\Character;
+use App\CharacterRepository;
+use App\CharacterLog;
+use App\CharacterLogRepository;
 
 if (isset($_SESSION['id'])) {
     $characterLogRepository = new CharacterLogRepository($base);

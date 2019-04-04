@@ -1,6 +1,11 @@
 <?php
 require __DIR__.'/header.php';
+use App\Character;
+use App\CharacterRepository;
+use App\CharacterLog;
+use App\CharacterLogRepository;
 
+/*
 if (isset($_SESSION['id'])) {
     $characterRepository = new CharacterRepository($base);
     $character = $characterRepository->find($_SESSION['id']);
@@ -22,20 +27,17 @@ if (isset($_SESSION['id'])) {
             <th>XP</th>
             <td><?= $character->getExperience(); ?></td>
         </tr>
+        <tr>
+            <th>Level</th>
+            <td><?= $character->getLevel(); ?></td>
+        </tr>
     </table>
-    <?php
 
+*/
 
-
-    $listOfCharacter = $characterRepository->findAllWithoutMe($_SESSION['id']);
-    foreach ($listOfCharacter as $character):?>
-    <?= $character->getName();?> : Action disponible <a href="attaque.php?id=<?= $character->getId();?>">Attaque</a> - <a href="heal.php?id=<?= $character->getId();?>">Soin</a><br><?php endforeach;
-
+$characters = null;
+if (isset($_SESSION['id'])) {
+    $characters = $characterRepository->findAllWithoutMe($_SESSION['id']);
 }
-
-
-
-require __DIR__.'/footer.php';
-
-
+echo $twig->render('index.html.twig', ['characters' => $characters]);
 ?>

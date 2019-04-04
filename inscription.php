@@ -1,5 +1,10 @@
 <?php
 require __DIR__ . '/header.php';
+
+use App\Character;
+use App\CharacterRepository;
+use App\CharacterLog;
+use App\CharacterLogRepository;
 ?>
 
 <form method='post'>
@@ -19,9 +24,9 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
             'name' => $_POST['name'],
             'password' => password_hash($_POST['password'], PASSWORD_ARGON2I),
             'hp' => '100',
-            'ap' => '10',
-            'experience' => '0',
-            'level' => '1'
+            'ap' => '100',
+            'experience' => 0,
+            'level' => 1
     ]);
 
     $characterRepository = new CharacterRepository($base);

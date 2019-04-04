@@ -3,16 +3,31 @@
 require __DIR__ . '/Class/CharacterRepository.php';
 require __DIR__ . '/header.php';
 
+use App\Character;
+use App\CharacterRepository;
+use App\CharacterLog;
+use App\CharacterLogRepository;
+
 
 if (isset($_SESSION['id'])) {
     echo "Vous êtes déjà connecter";
 } else {
     ?>
     <form method='post'>
-        <label>Nom</label>
-        <input type="text" name="name">
-        <label>Password</label>
-        <input type="password" name="password">
+        <table>
+
+            <tr>
+                <td><label>Nom</label></td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td><label>Password</label></td>
+                <td><input type="password" name="password"></td>
+            </tr>
+        </table>
+
+
+
         <button type="submit">Connexion</button>
     </form>
     <?php

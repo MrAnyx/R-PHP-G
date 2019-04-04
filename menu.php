@@ -1,22 +1,19 @@
 <nav class="menu">
-<a href="index.php">Index</a>
 
+    <?php
+    if (isset($_SESSION['id'])) {?>
 
-<?php
-if (isset($_SESSION['id'])) {?>
-    <a href="deconnection.php">Déconnection</a>
-    <a href="journal.php">Journal</a>
-<?php } else{ ?>
-    <a href="inscription.php">Inscription</a>
-    <a href="connexion.php">Connexion</a>
-<?php } ?>
-
-
-
-<?php if (isset($_SESSION['id'])) : ?>
-        <div>
-            PV : <?= $character->getHp(); ?>, AP : <?= $character->getAp(); ?>
-        </div>
-    <?php endif ?>
+        <ul class="nav nav-tabs bg-dark">
+            <li role="presentation" class="active"><a href="index.php">Index</a></li>
+            <li role="presentation" class="active"><a href="deconnection.php">Déconnection</a></li>
+            <li role="presentation"><a href="journal.php">Journal</a></li>
+        </ul>
+    <?php } else{ ?>
+        <ul class="nav nav-tabs bg-dark">
+            <li role="presentation"><a href="index.php">Index</a></li>
+            <li role="presentation" class="active"><a href="inscription.php">Inscription</a></li>
+            <li role="presentation"><a href="connexion.php">Connexion</a></li>
+        </ul>
+    <?php } ?>
 
 </nav>

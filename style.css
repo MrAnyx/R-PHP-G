@@ -1,3 +1,24 @@
 .menu {
     width:100%;
 }
+
+li{
+    margin: 10px;
+}
+
+.menu{
+    margin-bottom: 10px;
+}
+
+a{
+    color: white;
+
+}
+a:hover{
+    color: #ffa500;
+    text-decoration: none;
+
+}
+.row{
+    margin-left: 10px;
+}
